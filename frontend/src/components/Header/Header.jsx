@@ -24,6 +24,7 @@ const nav_links = [
 
 function Header() {
   const headerRef = useRef(null);
+  const menuRef = useRef(null);
   const navigate = useNavigate();
   const { user, dispatch } = useContext(AuthContext);
   console.log("Hello",user);
@@ -33,24 +34,26 @@ function Header() {
     navigate("/");
   };
 
-  // const stickyHeaderFunc = () => {
-  //   window.addEventListener("scroll", () => {
-  //     if (
-  //       document.body.scrollTop > 80 ||
-  //       document.documentElement.scrollTop > 80
-  //     ) {
-  //       headerRef.current.classList.add("sticky__header");
-  //     } else {
-  //       headerRef.current.classList.remove("sticky__header");
-  //     }
-  //   });
-  // };
+  const stickyHeaderFunc = () => {
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
+        headerRef.current.classList.add("sticky__header");
+      } else {
+        headerRef.current.classList.remove("sticky__header");
+      }
+    });
+  };
 
   useEffect(() => {
-    // stickyHeaderFunc();
+    stickyHeaderFunc();
 
-    // return window.removeEventListener("scroll", stickyHeaderFunc);
+    return window.removeEventListener("scroll", stickyHeaderFunc);
   });
+
+  const toggleMenu = () => menuRef.current.classList.toggle("show__menu")
 
   return (
     <header className="header" ref={headerRef}>
@@ -60,7 +63,7 @@ function Header() {
             <div className="logo">
               <img src={logo} alt="logo" />
             </div>
-            <div className="navigation">
+            <div className="navigation" ref={menuRef} onClick={toggleMenu}>
               <ul className="menu d-flex align-items-center gap-5">
                 {nav_links.map((item, index) => (
                   <li className="nav__item" key={index}>
@@ -96,7 +99,7 @@ function Header() {
                   </>
                 )}
               </div>
-              <span className="menu__mobile">
+              <span className="menu__mobile" onClick={toggleMenu}>
                 <i className="ri-menu-line"></i>
               </span>
             </div>

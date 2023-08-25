@@ -1,16 +1,22 @@
-import React, { useState } from "react";
-import "./booking.css";
-
+import React, { useContext, useState } from "react";
 import { Form, FormGroup, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
+import { BASE_URL } from "./../../utils/config";
+import { AuthContext } from "./../../context/AuthContext";
+
+import "./booking.css";
+
 const Booking = ({ tour, avgRating }) => {
   const navigate = useNavigate();
-  const { price, reviews } = tour;
+  const { price, reviews, title } = tour;
 
-  const [creadentials, setCreadentials] = useState({
-    userId: "1",
-    userEmail: "abc@abc.gmail",
+  const { user } = useContext(AuthContext);
+
+  const [booking, setBooking] = useState({
+    userId: user && user._doc._id,
+    userEmail: user && user._doc.email,
+    tourName: title,
     fullName: "",
     phone: "",
     guestSize: 1,
@@ -18,17 +24,41 @@ const Booking = ({ tour, avgRating }) => {
   });
 
   const handleChange = (e) => {
-    setCreadentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setBooking((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
   const serviceFee = 10;
   const totalAmount =
-    Number(price) * Number(creadentials.guestSize) + Number(serviceFee);
+    Number(price) * Number(booking.guestSize) + Number(serviceFee);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
+    const _user = user._doc;
+    console.log(user);
+    console.log(booking);
+    try {
+      if (!_user || _user === null || _user === "undefine") {
+        return alert("please sign in");
+      }
 
-    navigate("/thank-you");
+      const res = await fetch(`${BASE_URL}/booking`, {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(booking),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        return alert(result.message);
+      }
+      navigate("/thank-you");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
