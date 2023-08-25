@@ -18,11 +18,10 @@ const Tours = () => {
     data: tours,
     loading,
     error,
-  } = useFetch(`${BASE_URL}/tours?page=${page}`);
+  } = useFetch(`/tours?page=${page}`);
   // const { data: tourCount } = useFetch(
   //   `http://localhost:8000/tours/gettourcount`
   // );
-  // console.log("aaa", tourCount);
   // useEffect(() => {
   //   const pages = Math.ceil(tourCount / 4);
   //   setPageCount(pages);

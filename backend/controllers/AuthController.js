@@ -7,7 +7,6 @@ export const register = async (req, res) => {
   // hassing password
   const salt = bcrypt.genSaltSync(10);
   const hashPassword = bcrypt.hashSync(req.body.password, salt);
-  console.log("register");
 
   try {
     const newUser = new User({
@@ -33,7 +32,6 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const email = req.body.email;
-  console.log("login");
 
   try {
     const user = await User.findOne({ email });
@@ -63,17 +61,12 @@ export const login = async (req, res) => {
             role: user.role,
           },
           process.env.JWT_SECRET_KEY
-          // { expiresIn: "15d" }
         );
-        console.log(token);
         //set token in the browser cookies and send the response to the client
-        // res.cookie("accessToken", token, {
-        //   // path: "/",
-        //   httpOnly: true,
-        // });
-        // Cookies.set("token", token);
-        // res.cookie("token", "token");
-        res.cookie("token", token, { httpOnly: true });
+        res.cookie("accessToken", token, {
+          // path: "/",
+          httpOnly: true,
+        });
 
         res.status(200).json({
           token,

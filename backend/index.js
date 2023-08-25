@@ -40,19 +40,16 @@ app.use(session({
   saveUninitialized: false,
   secure: false,
   cookie: {
-    maxAge: 3600000, // 1 hour in milliseconds
-    httpOnly: true, // The cookie can't be accessed via JavaScript
-    // secure: true, // Set to true if you're using HTTPS
+    maxAge: 3600000,
+    httpOnly: true, 
   },
 }));
 
 const corsOption = {
   origin: "http://localhost:3000",
-  methods: 'GET, PUT, POST, DELETE',
   optionsSuccessStatus : 200,
   credentials: true,
 };
-console.log(corsOption)
 app.use(cors(corsOption));
 app.use(cookieParser());
 

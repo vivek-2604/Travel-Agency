@@ -3,11 +3,10 @@ import Review from "../models/Review.js";
 
 export const createReview = async (req, res) => {
   const tourId = req.params.tourId;
-  const newReview = new Review({ ...req.body });
-
+  
   try {
+    const newReview = new Review({ ...req.body });
     const savedReview = await newReview.save();
-    
     await Tour.findByIdAndUpdate(tourId, {
       $push: { reviews: savedReview },
     });

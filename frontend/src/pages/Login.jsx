@@ -4,7 +4,6 @@ import "../styles/login.css";
 // import Cookies from 'js-cookie';
 import { Row, Container, Col, FormGroup, Form, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
-
 import loginImg from "../assets/images/login.png";
 import userImg from "../assets/images/user.png";
 
@@ -30,7 +29,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
 
     try {
-      const res = await fetch(`${BASE_URL}/auth/login`, {
+      const res = await fetch("/auth/login", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -38,14 +37,13 @@ const Login = () => {
         creadentials: "include",
         body: JSON.stringify(creadentials),
       });
+     
       const result = await res.json();
-      console.log("123",result);
 
       if (!res.ok) {
         alert(result.message);
       } else {
-        dispatch({ type: "LOGIN_SUCCESS", payload: result.data});
-        // Cookies.set('token', result.token, { secure: true, sameSite: 'strict' });
+        dispatch({ type: "LOGIN_SUCCESS", payload: result.data });
         navigate("/");
       }
     } catch (err) {

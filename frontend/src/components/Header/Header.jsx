@@ -13,10 +13,6 @@ const nav_links = [
     display: "Home",
   },
   {
-    path: "/about",
-    display: "About",
-  },
-  {
     path: "/tour",
     display: "Tours",
   },
@@ -27,7 +23,6 @@ function Header() {
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const { user, dispatch } = useContext(AuthContext);
-  console.log("Hello",user);
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
@@ -83,7 +78,7 @@ function Header() {
               <div className="nav_btns d-flex align-items-center gap-4">
                 {user ? (
                   <>
-                    <h5 className="mb=0">{user.username}</h5>
+                    <h5 className="mb=0">{user?._doc.username}</h5>
                     <Button className="btn btn-dark" onClick={logout}>
                       Logout
                     </Button>

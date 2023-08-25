@@ -25,7 +25,7 @@ const TourDetails = () => {
     data: tour,
     loading,
     error,
-  } = useFetch(`${BASE_URL}/tours/singletour/${id}`);
+  } = useFetch(`/tours/singletour/${id}`);
 
   const option = { day: "numeric", month: "long", year: "numeric" };
 
@@ -51,16 +51,12 @@ const TourDetails = () => {
       alert("please sign in");
     } else {
       try {
-        console.log(user._doc);
-        console.log(reviewText);
-        console.log(tourRating);
         const reviewObj = {
-          userName: user?.username,
+          username: user?._doc.username,
           reviewText: reviewText,
           rating: tourRating,
         };
-
-        const res = await fetch(`${BASE_URL}/review/${id}`, {
+        const res = await fetch(`/review/${id}`, {
           method: "post",
           headers: {
             "content-type": "application/json",
@@ -70,8 +66,6 @@ const TourDetails = () => {
         });
 
         const result = res.json();
-        console.log("HELLLLLLLo");
-        console.log("result", result);
       } catch (err) {
         alert(err.message);
       }
