@@ -8,8 +8,8 @@ export const createNews = async (req, res) => {
     service: "Gmail", // e.g., Gmail, Outlook
     host: 'smtp.gmail.com',
     auth: {
-      user: "vivekmashru01@gmail.com",
-      pass: "iqyaslhfwvquypwa",
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
     },
   });
 
