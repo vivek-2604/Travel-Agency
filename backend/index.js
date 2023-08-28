@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser"
 
 import authRoute from "./routes/AuthRoutes.js";
 import tourRoute from "./routes/TourRoutes.js";
 import userRoute from "./routes/UserRoutes.js";
 import reviewRoute from "./routes/reviewsRoute.js";
 import bookingRoute from "./routes/bookigsRoutes.js";
+import newsRoute from "./routes/NewsRoutes.js"
 
 import session from "express-session"
 
@@ -44,6 +46,8 @@ app.use(session({
     httpOnly: true, 
   },
 }));
+app.use(bodyParser.json()); 
+
 
 const corsOption = {
   origin: "http://localhost:3000",
@@ -59,6 +63,8 @@ app.use("/tours", tourRoute);
 app.use("/users", userRoute);
 app.use("/review", reviewRoute);
 app.use("/booking", bookingRoute);
+app.use("/subscribe", newsRoute);
+
 
 app.listen(port, () => {
   connect();

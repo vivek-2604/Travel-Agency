@@ -2,8 +2,31 @@ import "./newsLetter.css";
 import { Col, Row, Container } from "reactstrap";
 
 import maleTourist from "../assets/images/male-tourist.png";
+import { useState } from "react";
 
 const NewsLetter = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/subscribe", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        console.log("DONNNEE");
+      } else {
+        console.log("Something Went Wronggg");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <section className="newsletter">
       <Container>
@@ -13,8 +36,19 @@ const NewsLetter = () => {
               <h2>Subscribe now to get useful travelling information</h2>
 
               <div className="newsletter__input">
-                <input type="email" placeholder="Entye your email" />
-                <button className="btn newsletter__btn">Subscribe</button>
+                <input
+                  type="email"
+                  placeholder="Entye your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <button
+                  className="btn newsletter__btn"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Subscribe
+                </button>
               </div>
               <p>
                 Subscribe to our newsletter and unlock a world of exclusive
