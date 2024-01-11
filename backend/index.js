@@ -50,7 +50,7 @@ app.use(bodyParser.json());
 
 
 const corsOption = {
-  origin: "https://travel-agency-7pt8.vercel.app/",
+  origin: "https://travel-agency-7pt8.vercel.app/home",
   optionsSuccessStatus : 200,
   credentials: true,
 };
