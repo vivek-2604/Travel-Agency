@@ -20,7 +20,7 @@ dotenv.config();
 const app = express();
 
 const port = process.env.PORT || 8001;
-
+// https://travel-agency-xi-murex.vercel.app/
 
 //database Connection
 mongoose.set("strictQuery", false);
@@ -50,7 +50,7 @@ app.use(bodyParser.json());
 
 
 const corsOption = {
-  origin: "http://localhost:3000",
+  origin: "https://travel-agency-7pt8.vercel.app/",
   optionsSuccessStatus : 200,
   credentials: true,
 };
