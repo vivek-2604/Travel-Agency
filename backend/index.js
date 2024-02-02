@@ -19,7 +19,7 @@ import session from "express-session"
 dotenv.config();
 const app = express();
 
-const port = process.env.PORT || 8001;
+const port = 8000;
 // https://travel-agency-xi-murex.vercel.app/
 
 //database Connection
@@ -49,12 +49,12 @@ app.use(session({
 app.use(bodyParser.json()); 
 
 
-const corsOption = {
-  origin: "https://travel-agency-7pt8.vercel.app/home",
-  optionsSuccessStatus : 200,
-  credentials: true,
-};
-app.use(cors(corsOption));
+// const corsOption = {
+//   origin: "*",
+//   optionsSuccessStatus : 200,
+//   credentials: true,
+// };
+// app.use(cors(corsOption));
 app.use(cookieParser());
 
 app.use(express.json());
@@ -64,7 +64,9 @@ app.use("/users", userRoute);
 app.use("/review", reviewRoute);
 app.use("/booking", bookingRoute);
 app.use("/subscribe", newsRoute);
-
+app.get("/hello", (req , res)=>{
+return res.send("hello")
+});
 
 app.listen(port, () => {
   connect();
