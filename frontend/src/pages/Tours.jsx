@@ -35,6 +35,7 @@ const Tours = () => {
         const res = await fetch(`${BASE_URL}/tours?page=1`);
 
         if (!res.ok) {
+
           // setError("failed to fetch");
         }
         const result = await res.json();
