@@ -3,6 +3,7 @@ import { Col, Row, Container } from "reactstrap";
 
 import maleTourist from "../assets/images/male-tourist.png";
 import { useState } from "react";
+import { BASE_URL } from "./../utils/config";
 
 const NewsLetter = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const NewsLetter = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/subscribe", {
+      const res = await fetch(`${BASE_URL}/subscribe`, {
         method: "post",
         headers: {
           "content-type": "application/json",

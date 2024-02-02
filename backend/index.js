@@ -49,12 +49,12 @@ app.use(session({
 app.use(bodyParser.json()); 
 
 
-// const corsOption = {
-//   origin: "*",
-//   optionsSuccessStatus : 200,
-//   credentials: true,
-// };
-// app.use(cors(corsOption));
+const corsOption = {
+  origin: "*",
+  optionsSuccessStatus : 200,
+  credentials: true,
+};
+app.use(cors(corsOption));
 app.use(cookieParser());
 
 app.use(express.json());

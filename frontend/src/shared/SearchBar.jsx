@@ -21,7 +21,7 @@ const SearchBar = () => {
     }
 
     const res = await fetch(
-      `/tours/search/gettourbysearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`
+      `${BASE_URL}/tours/search/gettourbysearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`
     );
 
     if (!res.ok) alert("something went wrong!");

@@ -25,7 +25,7 @@ const TourDetails = () => {
     data: tour,
     loading,
     error,
-  } = useFetch(`/tours/singletour/${id}`);
+  } = useFetch(`${BASE_URL}/tours/singletour/${id}`);
 
   const option = { day: "numeric", month: "long", year: "numeric" };
 
@@ -56,7 +56,7 @@ const TourDetails = () => {
           reviewText: reviewText,
           rating: tourRating,
         };
-        const res = await fetch(`/review/${id}`, {
+        const res = await fetch(`${BASE_URL}/review/${id}`, {
           method: "post",
           headers: {
             "content-type": "application/json",
@@ -79,9 +79,9 @@ const TourDetails = () => {
   return (
     <>
       <section>
-        <Container>
+      <Container>
           {loading && <h4 className="text-center pt-5">Loading....</h4>}
-          {error && <h4 className="text-center pt-5">{error}</h4>}
+          {/* {error && <h4 className="text-center pt-5">{error}</h4>} */}
           {!loading && !error && (
             <Row>
               <Col lg="8">
@@ -102,7 +102,7 @@ const TourDetails = () => {
                         {totalRating === 0 ? (
                           "not rated"
                         ) : (
-                          <span>({reviews?.length})</span>
+                          <span>{reviews?.length}</span>
                         )}
                       </span>
 
