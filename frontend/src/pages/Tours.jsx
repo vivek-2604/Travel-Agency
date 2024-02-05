@@ -13,31 +13,36 @@ import { BASE_URL } from "../utils/config";
 const Tours = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [data,setData] = useState([])
-  // const {
-  //   data: tours,
-  //   loading,
-  //   error,
-  // } = useFetch(`${BASE_URL}/tours?page=1`);
-  // const { data: tourCount } = useFetch(
-  //   `http://localhost:8000/tours/gettourcount`
-  // );
-  // useEffect(() => {
-  //   const pages = Math.ceil(tourCount / 4);
-  //   setPageCount(pages);
-  //   window.scrollTo(0, 0);
-  // }, [page]);
+  const [ data, setData] = useState([])
+
+  const {
+    data: tours,
+    loading,
+    error,
+  } = useFetch(`${BASE_URL}/tours?page=${page}`);
+  const { data: tourCount } = useFetch(
+    `http://localhost:8000/tour/gettourcount`
+  );
+
+  console.log("tour:::",tourCount);
+  console.log("tourCOunt:::",tourCount);
 
   useEffect(() => {
+    const pages = Math.ceil(tourCount / 4);
+    setPageCount(pages);
+    window.scrollTo(0, 0);
+  }, [page, tourCount]);
+
+
+   useEffect(() => {
     const fetchData = async () => {
       // setLoading(true);
       try {
-        const res = await fetch(`${BASE_URL}/tours?page=1`);
-
+        const res = await fetch(`${BASE_URL}/tours`);
         if (!res.ok) {
-
+          // console.log("hii");
           // setError("failed to fetch");
-        }
+        }       
         const result = await res.json();
         setData(result.data);
         // setLoading(false);
@@ -62,11 +67,11 @@ const Tours = () => {
 
       <section>
         <Container className="pt-0">
-          {/* {loading && <h4 className="text-center pt-5">Loading...</h4>} */}
-          {/* {error && <h4 className="text-center pt-5">{error}</h4>} */}
-          {/* {!loading && !error && ( */}
+          {loading && <h4 className="text-center pt-5">Loading...</h4>}
+          {error && <h4 className="text-center pt-5">{error}</h4>}
+          {!loading && !error && (
             <Row>
-              {data?.map((tour) => (
+              {tours?.map((tour) => (
                 <Col className="mb-4" lg="3" md="6" sm="6" key={tour._id}>
                   <TourCard tour={tour}></TourCard>
                 </Col>
@@ -85,7 +90,7 @@ const Tours = () => {
                 </div>
               </Col>
             </Row>
-          {/* )} */}
+          )}
         </Container>
       </section>
 
