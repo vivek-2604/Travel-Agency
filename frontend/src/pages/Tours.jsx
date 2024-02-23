@@ -13,46 +13,20 @@ import { BASE_URL } from "../utils/config";
 const Tours = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [ data, setData] = useState([])
 
   const {
     data: tours,
     loading,
     error,
-  } = useFetch(`${BASE_URL}/tours?page=${page}`);
-  const { data: tourCount } = useFetch(
-    `http://localhost:8000/tour/gettourcount`
-  );
-
-  console.log("tour:::",tourCount);
-  console.log("tourCOunt:::",tourCount);
-
-  useEffect(() => {
-    const pages = Math.ceil(tourCount / 4);
-    setPageCount(pages);
-    window.scrollTo(0, 0);
-  }, [page, tourCount]);
-
-
-   useEffect(() => {
-    const fetchData = async () => {
-      // setLoading(true);
-      try {
-        const res = await fetch(`${BASE_URL}/tours`);
-        if (!res.ok) {
-          // console.log("hii");
-          // setError("failed to fetch");
-        }       
-        const result = await res.json();
-        setData(result.data);
-        // setLoading(false);
-      } catch (err) {
-        // setError(err.message);
-        // setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  } = useFetch(`/tours?page=${page}`);
+  // const { data: tourCount } = useFetch(
+  //   `http://localhost:8000/tours/gettourcount`
+  // );
+  // useEffect(() => {
+  //   const pages = Math.ceil(tourCount / 4);
+  //   setPageCount(pages);
+  //   window.scrollTo(0, 0);
+  // }, [page]);
 
   return (
     <>
