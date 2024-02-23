@@ -50,9 +50,9 @@ app.use(bodyParser.json());
 
 
 const corsOption = {
+  credentials: true,
   origin: "http://localhost:3000",
   optionsSuccessStatus : 200,
-  credentials: true,
 };
 app.use(cors(corsOption));
 app.use(cookieParser());

@@ -65,7 +65,7 @@ export const login = async (req, res) => {
         );
         
         console.log("Hello", token);
-        res.cookie("accessToken",token, {httpOnly: true});
+        res.cookie("accessToken",token, {httpOnly: true, domain: 'https://travel-agency-fr7h.onrender.com', path: '/' });
         
         res.status(200).json({
           token,
