@@ -63,10 +63,12 @@ export const login = async (req, res) => {
           process.env.JWT_SECRET_KEY
         );
         //set token in the browser cookies and send the response to the client
-        res.cookie("accessToken", token, {
-          // path: "/",
-          httpOnly: true,
-        });
+        // res.cookie("accessToken", token, {
+        //   path: "/",
+        //   httpOnly: true,
+        // });
+
+        Cookies.set("accesstoken",token)
 
         res.status(200).json({
           token,
