@@ -65,7 +65,7 @@ export const login = async (req, res) => {
         );
         
         console.log("Hello", token);
-        res.cookie("accessToken",token, {httpOnly: true, path: '/' });
+        res.cookie("accessToken",token);
         
         res.status(200).json({
           token,
