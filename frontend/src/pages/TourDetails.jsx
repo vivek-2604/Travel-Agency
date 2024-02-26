@@ -7,13 +7,12 @@ import avatar from "../assets/images/avatar.jpg";
 import Booking from "../components/Booking/Booking";
 import NewsLetter from "../shared/NewsLetter";
 import { AuthContext } from "./../context/AuthContext";
-
-import { BASE_URL } from "./../utils/config";
 import useFetch from "../hooks/useFetch";
 
 import "../styles/tourDetails.css";
 
 const TourDetails = () => {
+  const baseUrl = process.env.REACT_APP_BASE_URL
   const { id } = useParams();
   const reviewMsgRef = useRef("");
 
@@ -25,7 +24,7 @@ const TourDetails = () => {
     data: tour,
     loading,
     error,
-  } = useFetch(`/tours/singletour/${id}`);
+  } = useFetch(`${baseUrl}/tours/singletour/${id}`);
 
   const option = { day: "numeric", month: "long", year: "numeric" };
 
@@ -56,7 +55,7 @@ const TourDetails = () => {
           reviewText: reviewText,
           rating: tourRating,
         };
-        const res = await fetch(`/review/${id}`, {
+        const res = await fetch(`${baseUrl}/review/${id}`, {
           method: "post",
           headers: {
             "content-type": "application/json",
@@ -66,11 +65,14 @@ const TourDetails = () => {
         });
 
         const result = res.json();
+        console.log(result);
       } catch (err) {
         alert(err.message);
       }
     }
   };
+
+  console.log(reviewMsgRef);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -82,7 +84,7 @@ const TourDetails = () => {
         <Container>
           {loading && <h4 className="text-center pt-5">Loading....</h4>}
           {error && <h4 className="text-center pt-5">{error}</h4>}
-          {!loading && !error && (
+          {!loading && !error && 
             <Row>
               <Col lg="8">
                 <div className="tour__content">
@@ -204,7 +206,7 @@ const TourDetails = () => {
                 <Booking tour={tour} avgRating={avgRating} />
               </Col>
             </Row>
-          )}
+            }
         </Container>
       </section>
       <NewsLetter />

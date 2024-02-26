@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Form, FormGroup, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-
-import { BASE_URL } from "./../../utils/config";
 import { AuthContext } from "./../../context/AuthContext";
 
 import "./booking.css";
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const Booking = ({ tour, avgRating }) => {
   const navigate = useNavigate();
@@ -39,7 +38,8 @@ const Booking = ({ tour, avgRating }) => {
         return alert("please sign in");
       }
 
-      const res = await fetch(`/booking`, {
+      console.log(baseUrl);
+      const res = await fetch(`${baseUrl}/booking/`, {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -53,7 +53,7 @@ const Booking = ({ tour, avgRating }) => {
       if (!res.ok) {
         return alert(result.message);
       }
-      navigate("/thank-you");
+      navigate(`${baseUrl}/thank-you`);
     } catch (err) {
       console.log(err);
     }

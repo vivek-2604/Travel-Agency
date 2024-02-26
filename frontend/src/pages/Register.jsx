@@ -7,9 +7,9 @@ import { Link, Navigate, json, useNavigate } from "react-router-dom";
 import registerImg from "../assets/images/register.png";
 import userImg from "../assets/images/user.png";
 import { AuthContext } from "./../context/AuthContext";
-import { BASE_URL } from "./../utils/config";
 
 const Register = () => {
+  const baseUrl = process.env.REACT_APP_BASE_URL
   const [creadentials, setCreadentials] = useState({
     userName: undefined,
     email: undefined,
@@ -27,7 +27,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`/auth/register`, {
+      const res = await fetch(`${baseUrl}/auth/register`, {
         method: "post",
         headers: {
           "content-type": "application/json",

@@ -8,9 +8,9 @@ import loginImg from "../assets/images/login.png";
 import userImg from "../assets/images/user.png";
 
 import { AuthContext } from "./../context/AuthContext";
-import { BASE_URL } from "./../utils/config";
 
 const Login = () => {
+  const baseUrl = process.env.REACT_APP_BASE_URL
   const [creadentials, setCreadentials] = useState({
     email: undefined,
     password: undefined,
@@ -29,7 +29,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
 
     try {
-      const res = await fetch("/auth/login", {
+      const res = await fetch(`${baseUrl}/auth/login`, {
         method: "post",
         headers: {
           "content-type": "application/json",
