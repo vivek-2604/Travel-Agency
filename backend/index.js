@@ -55,7 +55,7 @@ app.use(bodyParser.json());
 //   optionsSuccessStatus : 200,
 // };
 
-// app.use(cors(corsOption));
+app.use(cors());
 app.use(cookieParser());
 
 app.use(express.json());
