@@ -31,7 +31,6 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  console.log("HEYYYY")
   const email = req.body.email;
 
   try {

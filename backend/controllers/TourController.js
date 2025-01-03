@@ -150,7 +150,7 @@ export const getTourCount = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      totalCount: tourCount,
+      data: tourCount,
       message: "Getting Tours Count",
     });
   } catch {

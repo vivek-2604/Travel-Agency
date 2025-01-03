@@ -24,7 +24,7 @@ const TourDetails = () => {
     data: tour,
     loading,
     error,
-  } = useFetch(`${baseUrl}/tours/singletour/${id}`);
+  } = useFetch(`/tours/singletour/${id}`);
 
   const option = { day: "numeric", month: "long", year: "numeric" };
 
@@ -65,14 +65,11 @@ const TourDetails = () => {
         });
 
         const result = res.json();
-        console.log(result);
       } catch (err) {
         alert(err.message);
       }
     }
   };
-
-  console.log(reviewMsgRef);
 
   useEffect(() => {
     window.scrollTo(0, 0);

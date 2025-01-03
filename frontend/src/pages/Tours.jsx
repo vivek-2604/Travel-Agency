@@ -14,19 +14,14 @@ const Tours = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
 
-  const {
-    data: tours,
-    loading,
-    error,
-  } = useFetch(`/tours?page=${page}`);
-  // const { data: tourCount } = useFetch(
-  //   `http://localhost:8000/tours/gettourcount`
-  // );
-  // useEffect(() => {
-  //   const pages = Math.ceil(tourCount / 4);
-  //   setPageCount(pages);
-  //   window.scrollTo(0, 0);
-  // }, [page]);
+  const { data: tours, loading, error } = useFetch("/tours");
+  const { data: totalCount } = useFetch("/tours/gettourcount");
+
+  useEffect(() => {
+    const pages = Math.ceil(totalCount / 4);
+    setPageCount(pages);
+    window.scrollTo(0, 0);
+  }, [page]);
 
   return (
     <>

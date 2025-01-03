@@ -5,18 +5,21 @@ import maleTourist from "../assets/images/male-tourist.png";
 import { useState } from "react";
 
 const NewsLetter = () => {
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/subscribe", {
+      const res = await fetch(`${baseUrl}/subscribe`, {
         method: "post",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
+
+      console.log(res, "ff");
 
       if (res.ok) {
         console.log("DONNNEE");

@@ -49,12 +49,13 @@ app.use(session({
 app.use(bodyParser.json()); 
 
 
-const corsOption = {
-  credentials: true,
-  origin: "http://localhost:3000",
-  optionsSuccessStatus : 200,
-};
-app.use(cors(corsOption));
+// const corsOption = {
+//   credentials: true,
+//   origin: "http://localhost:3000",
+//   optionsSuccessStatus : 200,
+// };
+
+// app.use(cors(corsOption));
 app.use(cookieParser());
 
 app.use(express.json());

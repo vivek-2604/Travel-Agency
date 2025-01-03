@@ -4,13 +4,12 @@ import { Col } from "reactstrap";
 import useFetch from "../../hooks/useFetch";
 
 const FeatedToursList = () => {
-  const baseUrl = process.env.REACT_APP_BASE_URL
-  console.log(baseUrl);
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const {
     data: featuredTours,
     loading,
     error,
-  } = useFetch(`${baseUrl}/tours/getFeaturedTours/`);
+  } = useFetch("/tours/getFeaturedTours/");
 
   return (
     <>

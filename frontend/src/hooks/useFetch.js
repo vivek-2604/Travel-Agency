@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BASE_URL } from "../utils/config";
 
 const useFetch = (url) => {
   const [data, setData] = useState([]);
@@ -9,12 +10,14 @@ const useFetch = (url) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(url);
+        const res = await fetch(`${BASE_URL}${url}`);
 
         if (!res.ok) {
           setError("failed to fetch");
         }
         const result = await res.json();
+        console.log(result, "Result");
+
         setData(result.data);
         setLoading(false);
       } catch (err) {
