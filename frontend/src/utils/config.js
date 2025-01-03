@@ -1,1 +1,1 @@
-export const  BASE_URL = "https://travel-agency-server-rho.vercel.app/"
+export const  BASE_URL = "https://travel-agency-server-rho.vercel.app"
